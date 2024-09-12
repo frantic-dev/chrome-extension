@@ -1,19 +1,30 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Brackets</title>
-    <style>
-      body {
-        height: 300px; /* popup max height is 600px */
-        width: 300px;  /* popup max width is 800px */
-      }
-    </style>
-  </head>
-  <body>
-    <h1>hello world</h1>
-    <button>pick episodes</button>
-    </div>
+<html lang="en">
 
-    <script src="popup.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>extension</title>
+  <script src="popup.js" defer>
+  </script>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<style>
+  body {
+    height: 400px;
+    /* popup max height is 600px */
+    width: 400px;
+    /* popup max width is 800px */
+    overflow: scroll;
+  }
+</style>
+
+<body>
+  <h1>hello world</h1>
+  <button>pick episodes</button>
+  <button id="add-serie-btn">add serie</button>
+  <div id="series">
+  </div>
+</body>
+
 </html>
