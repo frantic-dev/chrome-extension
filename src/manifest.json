@@ -7,15 +7,15 @@
     "storage",
     "activeTab",
     "scripting",
-    "sidePanel"
+    "sidePanel", 
+    "tabs"
   ],
   "side_panel": {
     "default_path": "popup.html"
   },
   "action": {
     "default_title": "click to open panel"
-  }
-  ,
+  },
   "background": {
     "service_worker": "background.js"
   },

@@ -49,10 +49,8 @@ export const displayData = async displaySerie => {
   request.onsuccess = event => {
     const data = event.target.result
     for (let serie of data) {
-      console.log(serie)
       displaySerie(serie)
     }
-    console.log('List of Data:', data)
     // return data
     // Display or process the data as needed
   }

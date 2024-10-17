@@ -1,8 +1,10 @@
 .serie {
   display: flex;
+  flex-wrap: wrap;
   margin: 20px 0;
 }
 
-.serie > img {
+
+.serie>img {
   width: 80px;
 }

@@ -48,7 +48,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         sendMssgToPopup({
           target: 'episodes',
           episodes: e.target.querySelectorAll('a').length,
-          container: e.target.innerHTML,
+          container: e.target.outerHTML,
           url: url,
         })
 
