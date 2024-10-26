@@ -59,3 +59,23 @@ export const displayData = async displaySerie => {
     console.error(`Error listing data: ${event.target.error}`)
   }
 }
+
+export async function getData() {
+  const db = await openDB()
+  const request = db.transaction(['seriesDb'])
+    .objectStore('seriesDb')
+    .getAll();
+
+  request.onsuccess = () => {
+    const students = request.result;
+
+    console.log('Got all the students');
+    console.table(students)
+
+    return students;
+  }
+
+  request.onerror = (err) => {
+    console.error(`Error to get all students: ${err}`)
+  }
+}

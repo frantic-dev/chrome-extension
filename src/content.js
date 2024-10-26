@@ -68,5 +68,15 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       e.target.style.outline = 'none'
       e.target.removeEventListener('click', handleClick)
     })
+  } else if (action === 'check') {
+
+    // function check() {
+    const body = document.querySelector('body')
+    const div = document.createElement('div')
+    div.textContent = 'boyyyyy'
+    body.append(div)
+    // }
+    console.log('bruh')
+    sendMssgToPopup('girlie pop')
   }
 })

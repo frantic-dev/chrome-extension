@@ -7,12 +7,15 @@
     "storage",
     "activeTab",
     "scripting",
-    "sidePanel", 
+    "sidePanel",
     "tabs"
   ],
   "side_panel": {
     "default_path": "popup.html"
   },
+  "host_permissions": [
+    "https://*/*"
+  ],
   "action": {
     "default_title": "click to open panel"
   },

@@ -1,4 +1,4 @@
-import { displayData, insertData } from './indexDb'
+import { displayData, getData, insertData } from './indexDb'
 
 console.log('[CONTENTSCRIPT] Popup opened')
 
@@ -14,26 +14,33 @@ function displaySerie(serie) {
   const seriesDiv = document.querySelector('#series')
   const id = document.querySelector('#series').childElementCount
 
-  seriesDiv.innerHTML += `
-  <div class="serie">
-      <img src="${serie.image}">
-      <div>
-        <b>${serie.title}</b>
-        <div class="serie-episodes">Episodes: ${serie.episodes}</div>
-        <button id="serie-${id}">check episodes</button>
-      </div>
-    </div>
-  `
+  const serieDiv = document.createElement('div')
+  serieDiv.className = 'serie'
+  seriesDiv.append(serieDiv)
 
-  const buttons = document.querySelectorAll('.serie button')
-  console.log(buttons)
+  const img = document.createElement('img')
+  img.src = serie.image
+  serieDiv.append(img)
 
-  for (let button of buttons) {
-    console.log(button)
-    button.addEventListener('click', () => {
-      scrapeSerie(serie)
-    })
-  }
+  const emptyDiv = document.createElement('div')
+  serieDiv.append(emptyDiv)
+
+  const title = document.createElement('b')
+  title.textContent = serie.title
+  emptyDiv.append(title)
+
+  const episodes = document.createElement('div')
+  episodes.className = 'serie-episodes'
+  episodes.textContent = 'Episodes: ' + serie.episodes
+  emptyDiv.append(episodes)
+
+  const button = document.createElement('button')
+  button.id = `serie-${id}`
+  button.textContent = 'check episodes'
+  button.addEventListener('click', () => {
+    scrapeSerie(serie)
+  })
+  emptyDiv.append(button)
 }
 
 const add_serie_btn = document.querySelector('#add-serie-btn')
@@ -76,9 +83,28 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   // sendResponse({ message: request, urls: urls })
 })
 
-
 async function scrapeSerie(serie) {
   console.log(serie)
   chrome.tabs.create({ url: serie.url, active: false })
+  chrome.tabs.query({ url: serie.url }, function (tabs) {
+    console.log(tabs);
+    if (tabs.length > 0) {
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        func: check
+      })
+    }
+
+  })
 }
 
+// let series = getData()
+// console.log(getData());
+
+function check() {
+  const body = document.querySelector('body')
+  const div = document.createElement('div')
+  div.textContent = 'boyyyyy'
+  body.append(div)
+  chrome.runtime.sendMessage({ message: 'url acquired' })
+}
